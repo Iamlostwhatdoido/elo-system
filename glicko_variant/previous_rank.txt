@@ -1,0 +1,100 @@
+Oath	1864	156
+Root	1684	216
+Heat	1602	232
+Fit to Print	1494	256
+Burgle Bros	1236	390
+Unsettled	1163	222
+Verdant	1162	190
+Sky Team	1137	622
+SETI	1095	651
+Brew	991	638
+Oriflamme	899	309
+Mountains of Madness	898	347
+Welcome to the Moon	854	510
+The Wolves	796	372
+Wok and Roll	745	238
+Libertalia	720	312
+Kanban EV	712	628
+Flamecraft	632	407
+Explorers of Navoria	632	262
+Almost Innocent	607	532
+Tea Dragon Society	589	630
+Keep the Heroes Out	585	301
+Vivarium	542	397
+Moonraker	432	311
+Fox Experiment	431	376
+Vast: Mysterious Manor	411	325
+Parks	406	394
+Regicide	395	252
+ICE	378	345
+Royal Visit	356	308
+Nemesis Lockdown	332	301
+Merchants of the Dark Road	312	391
+Luna Capital	306	297
+Darwin's Journey	285	263
+Forest Shuffle	277	347
+Daybreak	257	352
+King's Dilemma	251	680
+La Bête	215	384
+Cthulu Pandemie	192	290
+Everdell	178	833
+Photosynthesis	177	410
+Stockpile	173	530
+Time Stories	160	373
+Oltree	156	281
+Just One	150	382
+Codenames	150	308
+Ishtar	122	380
+Canvas	109	255
+Tokaido	87	345
+Arcs	66	387
+Earthborne Rangers	21	448
+Santa Monica	15	295
+The Crew	-4	552
+Paint the Roses	-4	335
+Revive	-33	310
+Paleo	-42	371
+Harmonies	-70	325
+Castle of Burgundy	-71	318
+Pagan	-89	515
+Earth	-91	338
+The guild of Merchant Explorers	-113	306
+Spirits of the Forest	-115	236
+Savernake Forest	-127	282
+Sleeping Gods	-174	305
+Codex	-208	238
+Colt Express	-223	393
+Spirit Island	-246	227
+Castles by the sea	-280	312
+Thorgal	-281	383
+Feed the Kraken	-286	341
+Isle of Cats	-351	276
+The Gang	-364	402
+Trio	-392	373
+Azul	-396	326
+Dice Forge	-402	303
+Sprawlopolis	-403	469
+Kelp : Shark vs Octopus	-403	355
+Cascadia	-409	271
+Les Poilus	-431	355
+Veiled Fate	-434	351
+Hanabi	-507	286
+Small World	-517	327
+Merchants and Marauders	-547	267
+Wonderful World	-552	273
+Arboretum	-600	344
+Beast	-659	369
+Infinity Gauntlet Love Letter	-850	187
+Mind MGMT	-944	269
+Inside Job	-966	301
+Tranquilité	-1003	642
+Yokai	-1067	290
+Welcome Back to the Dungeon	-1195	219
+Near and Far	-1206	213
+Leaving earth	-1306	300
+Orlog	-1339	183
+Héros à Louer	-1477	209
+B-Movie	-1489	217
+Exploding Kittens	-1495	173
+Cube Story	-1742	295
+Dernier Casse	-1778	178

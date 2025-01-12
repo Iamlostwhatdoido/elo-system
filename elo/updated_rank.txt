@@ -1,0 +1,6 @@
+Best1	525
+Best2	256
+Best3	270
+Best4	245
+Mid	137
+Low	67
