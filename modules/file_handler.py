@@ -4,7 +4,7 @@ from .sortable_class import Sortable
 
 
 if not os.path.exists("."+DATA_PATH):
-    print(f"Erreur : file_handler n'as pas trouvé {"."+DATA_PATH}")
+    print(f"Erreur : file_handler n'as pas trouvé {'.'+DATA_PATH}")
 elif not os.path.exists("."+DATA_PATH+UNKNOWN_FILE):
 	print(f"Erreur : file_handler n'as pas trouvé {UNKNOWN_FILE}")
 
