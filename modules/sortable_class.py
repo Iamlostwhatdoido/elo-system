@@ -17,8 +17,17 @@ class Sortable:
 	def update_score(self, variation:int):
 		self.score += variation
 	
+	def set_score(self, new_score:int):
+		self.score = new_score
+	
 	def update_doubt(self, variation:int):
 		self.doubt += variation
+	
+	def set_doubt(self, new_doubt:int):
+		self.doubt = new_doubt
+	
+	def change_image(self, new_path:str):
+		self.image_path = new_path
 
 if __name__ == "__main__":
 	pass
