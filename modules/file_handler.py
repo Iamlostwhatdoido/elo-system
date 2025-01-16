@@ -57,6 +57,20 @@ def load(collection:str) -> list[Sortable]:
 	return sortable_list
 
 
+def save(collection:str,sortable_list:list[Sortable]):
+	collection_path = "./data/"+ collection
+	if check_collection_validity(collection_path) != 0:
+		return
+	
+	with open(collection_path+"/save.tsv", "w") as outfile:
+		outfile.write("Name"+"\t"+"Score"+"\t"+"Doubt"+"\n")
+		outfile.write('\n'.join(e.name+'\t'+str(e.score)+'\t'+str(e.doubt) for e in sortable_list))
 
 if __name__ == "__main__":
-	generate_missing_png("test")
+	sortables = load("test")
+	for e in sortables:
+		e.print()
+	
+	sortables = [Sortable(f"Object {k}",k*100,k*10) for k in range(10,13)]
+
+	save("test",sortables)
