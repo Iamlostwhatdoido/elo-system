@@ -66,6 +66,10 @@ def save(collection:str,sortable_list:list[Sortable]):
 		outfile.write("Name"+"\t"+"Score"+"\t"+"Doubt"+"\n")
 		outfile.write('\n'.join(e.name+'\t'+str(e.score)+'\t'+str(e.doubt) for e in sortable_list))
 
+
+
+
+
 if __name__ == "__main__":
 	sortables = load("test")
 	for e in sortables:
