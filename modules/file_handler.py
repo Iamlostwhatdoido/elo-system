@@ -7,6 +7,7 @@ if not os.path.exists('./data'):
 elif not os.path.exists('./data/unknown.png'):
 	print(f"Erreur : file_handler n'as pas trouvé de unknown.png dans /data")
 
+
 def check_collection_validity(collection_path:str) -> int:
 	if not os.path.exists(collection_path):
 		print(f"Erreur : /{collection_path} introuvable")
@@ -27,15 +28,16 @@ def generate_missing_png(collection:str):
 		return
 	
 	
-	with open(collection_path+"/save.tsv","r") as file:
+	with open(collection_path+"/save.tsv","r") as save_file:
 		name_list = []
-		for line in file.readlines()[1:]:
+		for line in save_file.readlines()[1:]:
 			line_content_list = line.strip().split("\t")
 			name_list.append(line_content_list[0])
 	
 	for name in name_list:
 		if not os.path.exists(collection_path+"/image/"+name+".png"):
 			os.system("cp ./data/unknown.png "+"'"+collection_path+"/image/"+name+".png'")
+
 
 def clear_untracked_png(collection:str):
 	collection_path = "./data/"+ collection
@@ -54,14 +56,15 @@ def clear_untracked_png(collection:str):
 		if not file[:-4] in name_list:
 			os.remove(collection_path+"/image/"+file)
 
+
 def load(collection:str) -> list[Sortable]:
 	collection_path = "./data/"+ collection
 	if check_collection_validity(collection_path) != 0:
 		return
 	
-	with open(collection_path+"/save.tsv","r") as file:
+	with open(collection_path+"/save.tsv","r") as save_file:
 		sortable_list=[]
-		for line in file.readlines()[1:]:
+		for line in save_file.readlines()[1:]:
 			line_content_list = line.strip().split("\t")
 			new_sortable = Sortable(
 				line_content_list[0],
@@ -78,9 +81,9 @@ def save(collection:str,sortable_list:list[Sortable]):
 	if check_collection_validity(collection_path) != 0:
 		return
 	
-	with open(collection_path+"/save.tsv", "w") as outfile:
-		outfile.write("Name"+"\t"+"Score"+"\t"+"Doubt"+"\n")
-		outfile.write('\n'.join(e.name+'\t'+str(e.score)+'\t'+str(e.doubt) for e in sortable_list))
+	with open(collection_path+"/save.tsv", "w") as save_file:
+		save_file.write("Name"+"\t"+"Score"+"\t"+"Doubt"+"\n")
+		save_file.write('\n'.join(e.name+'\t'+str(e.score)+'\t'+str(e.doubt) for e in sortable_list))
 
 
 
