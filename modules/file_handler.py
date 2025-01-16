@@ -20,8 +20,8 @@ def load(collection:str) -> list[Sortable]:
 			line_content_list = line.strip().split("\t")
 			new_sortable = Sortable(
 				line_content_list[0],
-				line_content_list[1],
-				line_content_list[2],
+				int(line_content_list[1]),
+				int(line_content_list[2]),
 				collection_path+IMAGE_PATH+"/"+line_content_list[0]+".png"
 			)
 			sortable_list.append(new_sortable)
