@@ -6,9 +6,7 @@ from modules import file_handler as fh
 
 
 
+test_list = fh.load("test")
 
-if __name__ == "__main__":
-	test_list = fh.load("test")
-
-	for test in test_list:
-		test.print(show_image_path=True)
+for test in test_list:
+	test.print(show_image_path=True)
