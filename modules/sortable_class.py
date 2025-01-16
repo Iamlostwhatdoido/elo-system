@@ -3,3 +3,6 @@ class Sortable:
 		self.name = name
 		self.score = score
 		self.doubt = doubt
+		
+	def rename(self, new_name):
+		self.name = new_name
