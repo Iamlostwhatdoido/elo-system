@@ -122,4 +122,7 @@ def save(collection:str,sortable_list:list[Sortable]):
 
 
 if __name__ == "__main__":
-	generate_collection("test",0,400)
+	test_list = load("test")
+
+	for test in test_list:
+		test.print(show_image_path=True)
