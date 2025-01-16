@@ -16,6 +16,9 @@ class Sortable:
 			print(f"Erreur de chargement de l'image : {e}")
 			return None
 
+	def print(self):
+		print(self.name)
+
 	def rename(self, new_name:str):
 		self.name = new_name
 	
