@@ -1,12 +1,12 @@
 from PIL import Image,ImageTk
 
 class Sortable:
-	def __init__(self, name:str, score:int, doubt:int, image_path:str):
+	def __init__(self, name:str, score:int, doubt:int, image_path:str=""):
 		self.name = name
 		self.score = score
 		self.doubt = doubt
 		self.image_path = image_path
-		self.image = self.load_image(image_path)
+		self.image = self.load_image(image_path) if image_path != "" else None
 	
 	def load_image(image_path:str) -> ImageTk:
 		try:
@@ -27,3 +27,9 @@ class Sortable:
 	
 	def update_doubt(self, variation:int):
 		self.doubt += variation
+
+if __name__ == "__main__":
+	sortable = Sortable("Lol",15,10)
+
+	sortable.print()
+	print(sortable.image_path)
