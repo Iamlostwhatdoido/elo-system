@@ -7,14 +7,25 @@ if not os.path.exists('./data'):
 elif not os.path.exists('./data/unknown.png'):
 	print(f"file_handler n'as pas trouvé de unknown.png dans /data")
 
+def check_collection_validity(collection_path:str) -> int:
+	if not os.path.exists(collection_path):
+		print(f"/{collection_path} introuvable")
+		return 1
+	elif not os.path.exists(collection_path+"/save.tsv"):
+		print(f"save.tsv introuvable dans /{collection_path}")
+		return 2
+	elif not os.path.exists(collection_path+"/image"):
+		print(f"/image introuvable dans /{collection_path}")
+		return 3
+	else:
+		return 0
+
+
 def generate_missing_png(collection:str):
 	collection_path = "./data/"+ collection
-	if not os.path.exists(collection_path):
-		print(f"/{collection} introuvable dans /data")
-	if not os.path.exists(collection_path+"/save.tsv"):
-		print(f"save.tsv introuvable dans /{collection}")
-	if not os.path.exists(collection_path+"/image"):
-		print(f"/image introuvable dans /{collection}")
+	if check_collection_validity(collection_path) != 0:
+		return
+	
 	
 	with open(collection_path+"/save.tsv","r") as file:
 		name_list = []
@@ -29,12 +40,10 @@ def generate_missing_png(collection:str):
 
 def load(collection:str) -> list[Sortable]:
 	collection_path = "./data/"+ collection
-	if not os.path.exists(collection_path+"/save.tsv"):
-		print(f"'{collection}/save.tsv' introuvable dans /data")
+	if check_collection_validity(collection_path) != 0:
+		return
 	
 	with open(collection_path+"/save.tsv","r") as file:
-		
-		
 		sortable_list=[]
 		for line in file.readlines()[1:]:
 			line_content_list = line.strip().split("\t")
