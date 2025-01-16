@@ -37,6 +37,22 @@ def generate_missing_png(collection:str):
 		if not os.path.exists(collection_path+"/image/"+name+".png"):
 			os.system("cp ./data/unknown.png "+"'"+collection_path+"/image/"+name+".png'")
 
+def clear_untracked_png(collection:str):
+	collection_path = "./data/"+ collection
+	if check_collection_validity(collection_path) != 0:
+		return
+
+	with open(collection_path+"/save.tsv","r") as save_file:
+		name_list = []
+		for line in save_file.readlines()[1:]:
+			line_content_list = line.strip().split("\t")
+			name_list.append(line_content_list[0])
+	
+	file_list = os.listdir(collection_path+"/image")
+	
+	for file in file_list:
+		if not file[:-4] in name_list:
+			os.remove(collection_path+"/image/"+file)
 
 def load(collection:str) -> list[Sortable]:
 	collection_path = "./data/"+ collection
@@ -71,10 +87,4 @@ def save(collection:str,sortable_list:list[Sortable]):
 
 
 if __name__ == "__main__":
-	sortables = load("test")
-	for e in sortables:
-		e.print()
-	
-	sortables = [Sortable(f"Object {k}",k*100,k*10) for k in range(10,13)]
-
-	save("test",sortables)
+	clear_untracked_png("test")
