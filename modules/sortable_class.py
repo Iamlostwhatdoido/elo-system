@@ -6,3 +6,6 @@ class Sortable:
 		
 	def rename(self, new_name):
 		self.name = new_name
+	
+	def update_score(self, variation):
+		self.score += variation
