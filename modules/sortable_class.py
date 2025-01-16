@@ -5,6 +5,7 @@ class Sortable:
 		self.name = name
 		self.score = score
 		self.doubt = doubt
+		self.image_path = image_path
 		self.image = self.load_image(image_path)
 	
 	def load_image(image_path:str) -> ImageTk:
