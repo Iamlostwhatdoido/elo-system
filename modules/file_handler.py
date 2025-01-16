@@ -87,6 +87,7 @@ def generate_collection(collection:str,default_score:int,default_doubt:int):
 
 	add_untracked_png(collection,default_score,default_doubt)
 
+
 def load(collection:str) -> list[Sortable]:
 	collection_path = "./data/"+ collection
 	if check_collection_validity(collection_path) != 0:
