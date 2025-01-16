@@ -75,6 +75,17 @@ def add_untracked_png(collection:str,default_score:int,default_doubt:int):
 				save_file.write("\n"+file[:-4]+"\t"+str(default_score)+"\t"+str(default_doubt))
 
 
+def generate_collection(collection:str,default_score:int,default_doubt:int):
+	collection_path = "./data/"+ collection
+	if not os.path.exists(collection_path):
+		os.mkdir(collection_path)
+	if not os.path.exists(collection_path+"/image"):
+		os.mkdir(collection_path+"/image")
+	if not os.path.exists(collection_path+"/save.tsv"):
+		with open(collection_path+"/save.tsv", "w") as save_file:
+			save_file.write("Name"+"\t"+"Score"+"\t"+"Doubt")
+
+	add_untracked_png(collection,default_score,default_doubt)
 
 def load(collection:str) -> list[Sortable]:
 	collection_path = "./data/"+ collection
@@ -109,4 +120,4 @@ def save(collection:str,sortable_list:list[Sortable]):
 
 
 if __name__ == "__main__":
-	add_untracked_png("test",0,400)
+	generate_collection("test",0,400)
