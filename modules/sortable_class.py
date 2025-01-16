@@ -17,7 +17,7 @@ class Sortable:
 			return None
 
 	def print(self):
-		print(self.name)
+		print(f"{self.name} [{self.score} ~{self.doubt}]")
 
 	def rename(self, new_name:str):
 		self.name = new_name
