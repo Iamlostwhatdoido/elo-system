@@ -3,19 +3,19 @@ import os
 
 
 if not os.path.exists('./data'):
-    print(f"file_handler n'as pas trouvé de /data dans le projet")
+    print(f"Erreur : file_handler n'as pas trouvé de /data dans le projet")
 elif not os.path.exists('./data/unknown.png'):
-	print(f"file_handler n'as pas trouvé de unknown.png dans /data")
+	print(f"Erreur : file_handler n'as pas trouvé de unknown.png dans /data")
 
 def check_collection_validity(collection_path:str) -> int:
 	if not os.path.exists(collection_path):
-		print(f"/{collection_path} introuvable")
+		print(f"Erreur : /{collection_path} introuvable")
 		return 1
 	elif not os.path.exists(collection_path+"/save.tsv"):
-		print(f"save.tsv introuvable dans /{collection_path}")
+		print(f"Erreur : save.tsv introuvable dans /{collection_path}")
 		return 2
 	elif not os.path.exists(collection_path+"/image"):
-		print(f"/image introuvable dans /{collection_path}")
+		print(f"Erreur : /image introuvable dans /{collection_path}")
 		return 3
 	else:
 		return 0
