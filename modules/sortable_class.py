@@ -1,5 +1,5 @@
 class Sortable:
-	def __init__(self, name:str, score:int, doubt:int, image_path:str=""):
+	def __init__(self, name:str, score:int, doubt:int, image_path:str):
 		self.name = name
 		self.score = score
 		self.doubt = doubt
