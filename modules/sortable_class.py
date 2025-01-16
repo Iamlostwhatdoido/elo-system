@@ -1,5 +1,5 @@
 class Sortable:
-	def __init__(self, name, score, deviation):
+	def __init__(self, name, score, doubt):
 		self.name = name
 		self.score = score
-		self.deviation = deviation
+		self.doubt = doubt
