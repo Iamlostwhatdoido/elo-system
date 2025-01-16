@@ -101,6 +101,7 @@ def load(collection:str) -> list[Sortable]:
 				line_content_list[0],
 				line_content_list[1],
 				line_content_list[2],
+				collection_path+"/image/"+line_content_list[0]+".png"
 			)
 			sortable_list.append(new_sortable)
 
