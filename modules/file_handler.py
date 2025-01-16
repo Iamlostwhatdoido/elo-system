@@ -57,6 +57,25 @@ def clear_untracked_png(collection:str):
 			os.remove(collection_path+"/image/"+file)
 
 
+def add_untracked_png(collection:str,default_score:int,default_doubt:int):
+	collection_path = "./data/"+ collection
+	if check_collection_validity(collection_path) != 0:
+		return
+
+	sortable_list = load(collection)
+	name_list = []
+	for sortable in sortable_list:
+		name_list.append(sortable.name)
+	
+	file_list = os.listdir(collection_path+"/image")
+	
+	with open(collection_path+"/save.tsv","a") as save_file:
+		for file in file_list:
+			if not file[:-4] in name_list:
+				save_file.write("\n"+file[:-4]+"\t"+str(default_score)+"\t"+str(default_doubt))
+
+
+
 def load(collection:str) -> list[Sortable]:
 	collection_path = "./data/"+ collection
 	if check_collection_validity(collection_path) != 0:
@@ -90,4 +109,4 @@ def save(collection:str,sortable_list:list[Sortable]):
 
 
 if __name__ == "__main__":
-	clear_untracked_png("test")
+	add_untracked_png("test",0,400)
