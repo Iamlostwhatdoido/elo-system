@@ -4,26 +4,17 @@ from .sortable_class import Sortable
 
 CORRECTION = np.log(EXPECTANCY_BASE)/STANDARD_GAP
 
-def resolve_duel(winner:Sortable,loser:Sortable, is_draw:bool):
+def resolve_duel(subject:Sortable,opponent:Sortable, result:float) -> Sortable:
 	
-	winner_pertinence = _pertinence(winner.doubt)
-	loser_pertinence = _pertinence(loser.doubt)
-
-	winner_expectancy = _expectancy(winner.score, loser.score, loser_pertinence)
-	loser_expectancy = _expectancy(loser.score, winner.score, winner_pertinence)
-
-	if is_draw:
-		winner_score_points = round(winner.doubt*loser_pertinence*(0.5 - winner_expectancy))
-		loser_score_points = round(loser.doubt*winner_pertinence*(0.5 - loser_expectancy))
-	else:
-		winner_score_points = round(winner.doubt*loser_pertinence*(1-winner_expectancy))
-		loser_score_points = round(loser.doubt*winner_pertinence*(0-loser_expectancy))
+	opponent_pertinence = _pertinence(opponent.doubt)
+	subject_expectancy = _expectancy(subject.score, opponent.score, opponent_pertinence)
 	
-	winner.update_score(winner_score_points)
-	# winner.update_doubt()
+	score_points = round(subject.doubt * opponent_pertinence * (result-subject_expectancy))
 
-	loser.update_score(loser_score_points)
-	# loser.update_doubt()
+	new_score = subject.score + score_points
+	new_doubt = subject.doubt
+
+	return Sortable(subject.name,new_score,new_doubt,subject.image_path)
 
 
 def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]):
