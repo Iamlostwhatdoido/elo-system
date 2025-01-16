@@ -1,11 +1,6 @@
-from config import *
-
-if __name__ == "__main__":
-	from sortable_class import Sortable
-else:
-	from .sortable_class import Sortable
-
 import os
+from config import *
+from .sortable_class import Sortable
 
 
 if not os.path.exists("."+DATA_PATH):
@@ -122,13 +117,3 @@ def save(collection:str,sortable_list:list[Sortable]):
 	with open(collection_path+SAVE_FILE, "w") as save_file:
 		save_file.write("Name"+"\t"+"Score"+"\t"+"Doubt"+"\n")
 		save_file.write('\n'.join(e.name+'\t'+str(e.score)+'\t'+str(e.doubt) for e in sortable_list))
-
-
-
-
-
-if __name__ == "__main__":
-	test_list = load("test")
-
-	for test in test_list:
-		test.print(show_image_path=True)

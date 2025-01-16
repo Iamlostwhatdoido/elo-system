@@ -28,6 +28,3 @@ class Sortable:
 	
 	def change_image(self, new_path:str):
 		self.image_path = new_path
-
-if __name__ == "__main__":
-	pass
