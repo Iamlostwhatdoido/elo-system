@@ -9,3 +9,6 @@ class Sortable:
 	
 	def update_score(self, variation):
 		self.score += variation
+	
+	def update_doubt(self, variation):
+		self.doubt += variation
