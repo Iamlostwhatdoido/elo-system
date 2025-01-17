@@ -17,4 +17,4 @@ mre.resolve_match(winner_list,loser_list)
 
 print(f"\n - Updated : ")
 for test in test_list:
-	test.display()
+	test.display(True)

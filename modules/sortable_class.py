@@ -16,8 +16,9 @@ class Sortable:
 		self.doubt_modification = 0
 
 	def display(self,show_image_path:bool=False):
-		if not show_image_path:
-			print(f"{self.name} [{self.score} {self.score_modification:+}] ~{self.doubt} {self.doubt_modification:+}")
+		print(f"{self.name} [{self.score} {self.score_modification:+}] ~{self.doubt} {self.doubt_modification:+} ",end="")
+		if show_image_path :
+			print(f"({self.image_path})")
 		else:
-			print(f"{self.name} [{self.score} ~{self.doubt}]  ({self.image_path})")
+			print("")
 	
