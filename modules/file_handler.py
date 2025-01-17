@@ -47,8 +47,6 @@ def generate_collection(collection:str):
 		with open(collection_path+SAVE_FILE, "w") as save_file:
 			save_file.write("Name"+"\t"+"Score"+"\t"+"Doubt")
 
-	add_untracked_png(collection)
-
 
 def generate_missing_png(collection:str):
 	collection_path = "."+DATA_PATH+"/"+collection
