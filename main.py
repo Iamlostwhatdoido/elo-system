@@ -13,8 +13,9 @@ print(f"\n - Losers : ")
 for test in loser_list:
 	test.print()
 
-new_list = mre.resolve_match(winner_list,loser_list)
+mre.resolve_match(winner_list,loser_list)
 
 print(f"\n - Updated : ")
-for test in new_list:
+for test in test_list:
+	test.update()
 	test.print()
