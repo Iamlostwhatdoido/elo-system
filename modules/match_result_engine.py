@@ -59,15 +59,3 @@ def _expectancy(subject_score:int, opponent_score:int,opponent_pertinence:float)
 			opponent_pertinence * (opponent_score - subject_score) / STANDARD_GAP
 			)
 		)
-
-
-def _average(sortable_list:list[Sortable])->Sortable:
-	average_score = 0
-	average_doubt = 0
-	for sortable in sortable_list:
-		average_score += sortable.score
-		average_doubt += sortable.doubt**2
-	average_score = average_score/len(sortable_list)
-	average_doubt = np.sqrt(average_doubt/len(sortable_list))
-
-	return Sortable("average",round(average_score),round(average_doubt),None)
