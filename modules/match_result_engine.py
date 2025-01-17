@@ -4,7 +4,29 @@ from .sortable_class import Sortable
 
 CORRECTION = np.log(EXPECTANCY_BASE)/STANDARD_GAP
 
-def duel_results(subject:Sortable,opponent:Sortable, result:float):
+
+def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]) -> list[Sortable]:
+	for winner in winner_list:
+		for opponent in loser_list:
+			_duel_calculation(winner,opponent,1)
+		for opponent in winner_list:
+			if opponent == winner : continue
+			_duel_calculation(winner,opponent,0.5)
+	
+	for loser in loser_list:
+		for opponent in loser_list:
+			if opponent == loser : continue
+			_duel_calculation(loser,opponent,0.5)
+		for opponent in winner_list:
+			_duel_calculation(loser,opponent,0)
+	
+	for winner in winner_list:
+		winner.update()
+	for loser in loser_list:
+		loser.update()
+
+
+def _duel_calculation(subject:Sortable,opponent:Sortable, result:float):
 	print(f"\n!MATCH")
 	subject.print()
 	print(f"VS")
@@ -22,27 +44,6 @@ def duel_results(subject:Sortable,opponent:Sortable, result:float):
 
 	subject.score_modification += score_points
 
-
-def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]) -> list[Sortable]:
-	for winner in winner_list:
-		for opponent in loser_list:
-			duel_results(winner,opponent,1)
-		for opponent in winner_list:
-			if opponent == winner : continue
-			duel_results(winner,opponent,0.5)
-	
-	for loser in loser_list:
-		for opponent in loser_list:
-			if opponent == loser : continue
-			duel_results(loser,opponent,0.5)
-		for opponent in winner_list:
-			duel_results(loser,opponent,0)
-	
-	for winner in winner_list:
-		winner.update()
-	for loser in loser_list:
-		loser.update()
-	
 
 def _pertinence(doubt:int) -> float:
 	return 1/np.sqrt(
