@@ -18,15 +18,17 @@ class Window(customtkinter.CTk):
 		self.controller = Controller()
 		self.title("Elo Calculator")
 		self.geometry("800x600")
+
 		self.grid_columnconfigure((0, 1, 2), weight=1)
+		self.grid_rowconfigure(0, weight=1)
+		self.grid_rowconfigure(2, weight=2)
+		menu = CollectionInputMenu(master=self,can_cancel=False)
+		menu.grid(row=1, column=1, padx=0, pady=0)
 
-
+		# For Test
 		self.controller.set_collection("test")
 		self.controller.load_collection()
 		self.test_sortable = self.controller.pick_random(1)[0]
-
-		self.collection_frame = CollectionFrame(master=self)
-		self.collection_frame.grid(row=0, column=0, padx=0, pady=0, sticky="ew", columnspan=3)
 
 
 	def button_callback(self):
@@ -103,3 +105,26 @@ class CollectionFrame(customtkinter.CTkFrame):
 	def save_event(self):
 		pass
 
+
+class CollectionInputMenu(customtkinter.CTkFrame):
+	def __init__(self, master, can_cancel:bool=True, **kwargs):
+		super().__init__(master, **kwargs)
+
+
+		input_entry = customtkinter.CTkEntry(self, placeholder_text="Enter Collection's name", width=200)
+		input_entry.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
+
+		load_button = customtkinter.CTkButton(self, text="Load", width=95,command=None)
+
+		if can_cancel:
+			load_button.grid(row=1, column=0, padx=(10,5), pady=(0,10))
+			cancel_button = customtkinter.CTkButton(self, text="Cancel", width=95,command=None)
+			cancel_button.grid(row=1, column=1, padx=(5,10), pady=(0,10))
+		else:
+			load_button.configure(width=200)
+			load_button.grid(row=1, column=0, padx=10, pady=(0,10), columnspan=2)
+
+
+class ActionMenu(customtkinter.CTkFrame):
+	def __init__(self, master, **kwargs):
+		super().__init__(master, fg_color='transparent', **kwargs)
