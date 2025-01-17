@@ -18,18 +18,27 @@ class Window(customtkinter.CTk):
 		self.controller = Controller()
 		self.title("Elo Calculator")
 		self.geometry("800x600")
+		self.menu = None
 
-		self.grid_columnconfigure((0, 1, 2), weight=1)
-		self.grid_rowconfigure(0, weight=1)
-		self.grid_rowconfigure(2, weight=2)
-		menu = CollectionInputMenu(master=self,can_cancel=False)
-		menu.grid(row=1, column=1, padx=0, pady=0)
+		self.openCollectionInputMenu()
 
 		# For Test
 		self.controller.set_collection("test")
 		self.controller.load_collection()
 		self.test_sortable = self.controller.pick_random(1)[0]
 
+	def openCollectionInputMenu(self):
+		if self.menu:
+			self.menu.destroy()
+
+		self.grid_columnconfigure((0, 1, 2), weight=1)
+		self.grid_rowconfigure(0, weight=1)
+		self.grid_rowconfigure(2, weight=2)
+		self.menu = CollectionInputMenu(
+			master=self,
+			can_cancel = (self.controller.current_collection != None))
+		self.menu.grid(row=1, column=1, padx=0, pady=0)
+	
 
 	def button_callback(self):
 		print("button clicked")
@@ -125,6 +134,6 @@ class CollectionInputMenu(customtkinter.CTkFrame):
 			load_button.grid(row=1, column=0, padx=10, pady=(0,10), columnspan=2)
 
 
-class ActionMenu(customtkinter.CTkFrame):
+class MainMenu(customtkinter.CTkFrame):
 	def __init__(self, master, **kwargs):
 		super().__init__(master, fg_color='transparent', **kwargs)
