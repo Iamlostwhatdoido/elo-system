@@ -1,3 +1,5 @@
+from config import *
+
 class Sortable:
 	def __init__(self, name:str, score:int, doubt:int, image_path:str):
 		self.name = name
@@ -10,7 +12,7 @@ class Sortable:
 	def update(self):
 		self.score += self.score_modification
 		self.score_modification = 0
-		self.doubt += self.doubt_modification
+		self.doubt = min(max(self.doubt + self.doubt_modification,MINIMUM_DOUBT),DEFAULT_DOUBT)
 		self.doubt_modification = 0
 
 	def display(self,show_image_path:bool=False):
