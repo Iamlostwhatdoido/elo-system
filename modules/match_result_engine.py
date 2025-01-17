@@ -27,21 +27,9 @@ def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]) -> list[
 
 
 def _duel_calculation(subject:Sortable,opponent:Sortable, result:float):
-	print(f"\n!MATCH")
-	subject.print()
-	print(f"VS")
-	opponent.print()
-	print(f"result : {result}")
-
 	opponent_pertinence = _pertinence(opponent.doubt)
-	print(f" - opp. pert : {opponent_pertinence}")
-
 	subject_expectancy = _expectancy(subject.score, opponent.score, opponent_pertinence)
-	print(f" - win exp : {subject_expectancy}")
-
 	score_points = round(subject.doubt * opponent_pertinence * (result-subject_expectancy))
-	print(f" - scored points : {score_points}")
-
 	subject.score_modification += score_points
 
 
@@ -59,3 +47,4 @@ def _expectancy(subject_score:int, opponent_score:int,opponent_pertinence:float)
 			opponent_pertinence * (opponent_score - subject_score) / STANDARD_GAP
 			)
 		)
+
