@@ -1,8 +1,7 @@
-from modules import file_handler as fh, match_result_engine as mre
-from modules.sortable_class import Sortable
+import ui
 
 def run():
-	pass
+	ui.start_ui()
 
 
 if __name__ == "__main__":
