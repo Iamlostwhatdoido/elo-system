@@ -13,7 +13,7 @@ class Sortable:
 		self.doubt += self.doubt_modification
 		self.doubt_modification = 0
 
-	def print(self,show_image_path:bool=False):
+	def display(self,show_image_path:bool=False):
 		if not show_image_path:
 			print(f"{self.name} [{self.score} {self.score_modification:+}] ~{self.doubt} {self.doubt_modification:+}")
 		else:
