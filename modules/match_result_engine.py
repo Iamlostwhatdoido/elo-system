@@ -24,14 +24,6 @@ def duel_results(subject:Sortable,opponent:Sortable, result:float):
 
 
 def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]) -> list[Sortable]:
-	total_len = len(winner_list)+len(loser_list) - 1
-
-	winner_result = (len(loser_list) + 0.5 * (len(winner_list)-1) )/total_len
-	loser_result = 0.5 * (len(loser_list)-1) / total_len
-
-	print(winner_result)
-	print(loser_result)
-
 	for winner in winner_list:
 		for opponent in loser_list:
 			duel_results(winner,opponent,1)
@@ -45,6 +37,12 @@ def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]) -> list[
 			duel_results(loser,opponent,0.5)
 		for opponent in winner_list:
 			duel_results(loser,opponent,0)
+	
+	for winner in winner_list:
+		winner.update()
+	for loser in loser_list:
+		loser.update()
+	
 
 def _pertinence(doubt:int) -> float:
 	return 1/np.sqrt(
