@@ -1,6 +1,6 @@
 DATA_PATH = "/data"
 IMAGE_PATH = "/image"
-UNKNOWN_FILE = "/unknown.png"
+UNKNOWN_FILE_PATH = "./modules/unknown.png"
 SAVE_FILE = "/save.tsv"
 
 DEFAULT_SCORE = 0
