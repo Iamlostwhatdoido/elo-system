@@ -1,43 +1,52 @@
+from config import *
 from modules.controller import Controller
-import tkinter as tk
+from modules.sortable_class import Sortable
+
+from PIL import ImageTk,Image
+import customtkinter
 
 
-class Window(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.controller = Controller()
 
-        self.title("Elo Calculator")
-        self.geometry("800x600")
+class Window(customtkinter.CTk):
+	def __init__(self):
+		super().__init__()
+		self.controller = Controller()
 
-        self.winner_entry = tk.Entry(self)
-        self.loser_entry = tk.Entry(self)
-        self.relevance_entry = tk.Entry(self)
+		self.title("Elo Calculator")
+		self.geometry("800x600")
 
-        self.submit_button = tk.Button(self, text="Ajouter Match", command=self.submit_match)
+		self.controller.set_collection("test")
+		self.controller.load_collection()
+		test_sortable = self.controller.pick_random(1)[0]
 
-        self.message_label = tk.Label(self, text="", fg="red")
+		button = self.create_sortable_button(test_sortable, False)
+		button.pack(padx=20, pady=20)
 
-        # Placement des widgets
-        self.winner_entry.pack()
-        self.loser_entry.pack()
-        self.relevance_entry.pack()
-        self.submit_button.pack()
-        self.message_label.pack()
+	def button_callback(self):
+		print("button clicked")
 
-    def submit_match(self):
-        winner = self.winner_entry.get()
-        loser = self.loser_entry.get()
-        try:
-            relevance = float(self.relevance_entry.get())
-        except ValueError:
-            self.display_error("Relevance must be a number.")
-            return
 
-        self.controller.add_match(winner, loser, relevance)
+	def create_sortable_button(self, sortable:Sortable, toggle:bool):
+		my_image = customtkinter.CTkImage(light_image=Image.open(sortable.image_path),
+                                  size=(30, 30))
+		
+		button = customtkinter.CTkButton(self, text=sortable.name, image = my_image, command=self.button_callback)
+		return button
+
+
+	def submit_match(self):
+		winner = self.winner_entry.get()
+		loser = self.loser_entry.get()
+		try:
+			relevance = float(self.relevance_entry.get())
+		except ValueError:
+			self.display_error("Relevance must be a number.")
+			return
+
+		self.controller.add_match(winner, loser, relevance)
 
 
 
 def start_ui():
-    window = Window()
-    window.mainloop()
+	window = Window()
+	window.mainloop()
