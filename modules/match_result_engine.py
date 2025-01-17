@@ -5,11 +5,20 @@ from .sortable_class import Sortable
 CORRECTION = np.log(EXPECTANCY_BASE)/STANDARD_GAP
 
 def resolve_duel(subject:Sortable,opponent:Sortable, result:float) -> Sortable:
-	
+	print(f"\n!MATCH")
+	subject.print()
+	print(f"VS")
+	opponent.print()
+	print(f"result : {result}")
+
 	opponent_pertinence = _pertinence(opponent.doubt)
+	print(f" - opp. pert : {opponent_pertinence}")
+
 	subject_expectancy = _expectancy(subject.score, opponent.score, opponent_pertinence)
-	
+	print(f" - win exp : {subject_expectancy}")
+
 	score_points = round(subject.doubt * opponent_pertinence * (result-subject_expectancy))
+	print(f" - scored points : {score_points}")
 
 	new_score = subject.score + score_points
 	new_doubt = subject.doubt
@@ -17,12 +26,23 @@ def resolve_duel(subject:Sortable,opponent:Sortable, result:float) -> Sortable:
 	return Sortable(subject.name,new_score,new_doubt,subject.image_path)
 
 
-def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]):
-	for winner in winner_list:
-		resolve_duel(winner,_average(loser_list))
-	for loser in loser_list:
-		resolve_duel(loser,_average(winner_list))
+def resolve_match(winner_list:list[Sortable],loser_list:list[Sortable]) -> list[Sortable]:
+	total_len = len(winner_list)+len(loser_list) - 1
 
+	winner_result = (len(loser_list) + 0.5 * (len(winner_list)-1) )/total_len
+	loser_result = 0.5 * (len(loser_list)-1) / total_len
+
+	print(winner_result)
+	print(loser_result)
+
+	outlist = []
+	for winner in winner_list:
+		average_list = loser_list + [sortable for sortable in winner_list if sortable != winner]
+		outlist.append(resolve_duel(winner,_average(average_list),winner_result))
+	for loser in loser_list:
+		average_list = winner_list + [sortable for sortable in loser_list if sortable != loser]
+		outlist.append(resolve_duel(loser,_average(average_list),loser_result))
+	return outlist
 
 def _pertinence(doubt:int) -> float:
 	return 1/np.sqrt(
