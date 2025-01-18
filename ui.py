@@ -27,7 +27,7 @@ class Window(customtkinter.CTk):
 		## For Test
 		self.controller.set_collection("test")
 		self.controller.load_collection()
-		self.test_sortable = self.controller.pick_random(1)[0]
+		self.test_sortable = self.controller.pick_sortables()[0]
 
 		self.openSetupMenu()
 
