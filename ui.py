@@ -18,123 +18,125 @@ class Window(customtkinter.CTk):
 		self.controller = Controller()
 		self.title("Elo Calculator")
 		self.geometry("800x600")
-		self.menu = None
+
+		self.grid_columnconfigure(0, weight=1)
+		self.grid_rowconfigure(0, weight=1)
 
 		self.openInputMenu()
 
-		# For Test
+		## For Test
 		self.controller.set_collection("test")
 		self.controller.load_collection()
 		self.test_sortable = self.controller.pick_random(1)[0]
 
+		self.openSetupMenu()
+
+		## tests end
+
 
 	def openInputMenu(self):
-		if self.menu:
-			self.menu.destroy()
-
-		self.grid_columnconfigure((0, 1, 2), weight=1)
-		self.grid_rowconfigure(0, weight=1)
-		self.grid_rowconfigure(2, weight=2)
-		self.menu = InputMenu(
+		menu = InputMenu(
 			master=self,
 			can_cancel = (self.controller.current_collection != None))
-		self.menu.grid(row=1, column=1, padx=0, pady=0)
-	
+		menu.grid(row=0, column=0, sticky="nsew")
 
+	
 	def openSetupMenu(self):
-		pass
+		menu = SetupMenu(master=self)
+		menu.grid(row=0, column=0, sticky="nsew")
 
 
 	def openMatchMenu(self):
 		pass
 
 
-
-# class CollectionFrame(customtkinter.CTkFrame):
-# 	def __init__(self, master, **kwargs):
-# 		super().__init__(master, fg_color='transparent', **kwargs)
-# 		self.grid_columnconfigure(0, weight=1)
-
-
-# 		self.input_frame = customtkinter.CTkFrame(master=self,height=300)
-# 		self.input_frame.grid_columnconfigure((0,4), weight=1)
-
-# 		self.input_entry = customtkinter.CTkEntry(self.input_frame, placeholder_text="Enter Collection's name", width=200)
-# 		self.input_entry.grid(row=0, column=1, padx=10, pady=20)
-# 		self.load_button = customtkinter.CTkButton(self.input_frame, text="Load", width=80,command=self.load_event)
-# 		self.load_button.grid(row=0, column=2, padx=10, pady=20)
-# 		self.cancel_button = customtkinter.CTkButton(self.input_frame, text="Cancel", width=80,command=self.cancel_event)
-# 		self.cancel_button.grid(row=0, column=3, padx=0, pady=20)
-		
-# 		self.input_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
-
-
-# 		self.header_frame = customtkinter.CTkFrame(master=self,height=300)
-# 		self.header_frame.grid_columnconfigure(0, weight=1)
-
-# 		self.collection_label = customtkinter.CTkLabel(self.header_frame, text="None", justify="center", font=("",36))
-# 		self.collection_label.grid(row=0, column=0, padx=10, pady=(20,0))
-# 		self.info_label = customtkinter.CTkLabel(self.header_frame, text="Found 5678 items", justify="center", font=("",16))
-# 		self.info_label.grid(row=1, column=0, padx=10, pady=(10,0))
-# 		self.change_button = customtkinter.CTkButton(self.header_frame, text="Change", width=80,command=self.change_event)
-# 		self.change_button.grid(row=2, column=0, padx=10, pady=(10,20))
-# 		self.reload_button = customtkinter.CTkButton(self.header_frame, text="Reload", width=80,command=self.load_event)
-# 		self.reload_button.grid(row=2, column=0, padx=10, pady=(10,20))
-# 		self.save_button = customtkinter.CTkButton(self.header_frame, text="Save", width=80,command=self.save_event)
-# 		self.save_button.grid(row=2, column=0, padx=10, pady=(10,20))
-		
-# 		self.header_frame.grid(row=1, column=0, padx=10, pady=(0,10), sticky="nsew")
-# 		self.header_frame.grid_forget()
-
-# 	def cancel_event(self):
-# 		pass
-	
-
-# 	def change_event(self):
-# 		print(f"Simulated changing collection !")
-	
-
-# 	def load_event(self):
-# 		self.collection_label.configure(text=self.input_entry.get())
-# 		print(f"Simulated loading of {self.input_entry.get()} !")
-
-
-# 	def save_event(self):
-# 		pass
-
-
 class InputMenu(customtkinter.CTkFrame):
 	def __init__(self, master:Window, can_cancel:bool=True, **kwargs):
-		super().__init__(master, **kwargs)
+		super().__init__(master, fg_color='transparent', **kwargs)
 
+		self.grid_columnconfigure((0, 2), weight=1)
+		self.grid_rowconfigure(0, weight=1)
+		self.grid_rowconfigure(2, weight=2)
 
-		self.input_entry = customtkinter.CTkEntry(self, placeholder_text="Enter Collection's name", width=200)
+		frame = customtkinter.CTkFrame(self)
+		frame.grid(row=1, column=1, padx=0, pady=0)
+
+		self.input_entry = customtkinter.CTkEntry(frame, placeholder_text="Enter Collection's name", width=200)
 		self.input_entry.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
 
-		select_button = customtkinter.CTkButton(self, text="Select", width=95,command=self.select_event)
+		select_button = customtkinter.CTkButton(frame, text="Select", width=95,command=self.select_event)
 
 		if can_cancel:
 			select_button.grid(row=1, column=0, padx=(10,5), pady=(0,10))
-			cancel_button = customtkinter.CTkButton(self, text="Cancel", width=95,command=self.cancel_event)
+			cancel_button = customtkinter.CTkButton(frame, text="Cancel", width=95,command=self.cancel_event)
 			cancel_button.grid(row=1, column=1, padx=(5,10), pady=(0,10))
 		else:
 			select_button.configure(width=200)
 			select_button.grid(row=1, column=0, padx=10, pady=(0,10), columnspan=2)
-	
+		
 
 	def select_event(self):
 		new_collection = self.input_entry.get()
 		if new_collection != "":
-			print(f"Collection {new_collection} selected !")
+			self.master.controller.set_collection(new_collection)
+			self.master.openSetupMenu()
 	
 
 	def cancel_event(self):
-		print(f"Cancel button pressed")
+		self.master.openSetupMenu()
 
 
 class SetupMenu(customtkinter.CTkFrame):
 	def __init__(self, master:Window, **kwargs):
 		super().__init__(master, fg_color='transparent', **kwargs)
+
+		self.grid_columnconfigure((0, 2), weight=1)
+		self.grid_rowconfigure(1, weight=1)
+		self.grid_rowconfigure(3, weight=2)
+
+		header_frame = customtkinter.CTkFrame(self)
+		header_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew", columnspan=3)
+
+		header_frame.grid_columnconfigure((0, 4), weight=1)
+
+		title_label = customtkinter.CTkLabel(
+			header_frame,
+			text=master.controller.current_collection,
+			justify="center",
+			font=("",36))
+		title_label.grid(row=0, column=1, padx = 20, pady = (30,20), columnspan=3)
+
+		self.info_label = customtkinter.CTkLabel(
+			header_frame,
+			text=master.controller.information,
+			font=("",16))
+		self.info_label.grid(row=1, column=1, columnspan=3)
+		
+		change_button = customtkinter.CTkButton(header_frame, text="Change", width=80,command=self.change_event)
+		change_button.grid(row=2, column=1, padx=10, pady=(10,20))
+
+		load_button = customtkinter.CTkButton(header_frame, text="Load", width=80,command=self.load_event)
+		load_button.grid(row=2, column=2, padx=10, pady=(10,20))
+
+		save_button = customtkinter.CTkButton(header_frame, text="Save", width=80,command=self.save_event)
+		save_button.grid(row=2, column=3, padx=10, pady=(10,20))
+
+		main_frame = customtkinter.CTkFrame(self,height=100,width=200)
+		main_frame.grid(row=2, column=1)
+
+	def change_event(self):
+		self.master.openInputMenu()
+
+	def load_event(self):
+		self.master.controller.load_collection()
+		self.info_label.configure(text=self.master.controller.information)
+
+	def save_event(self):
+		pass
+
+
+		
+		
 
 
 class MatchMenu(customtkinter.CTkFrame):
