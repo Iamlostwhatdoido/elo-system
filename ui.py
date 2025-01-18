@@ -64,21 +64,23 @@ class InputMenu(customtkinter.CTkFrame):
 		self.input_entry = customtkinter.CTkEntry(frame, placeholder_text="Enter Collection's name", width=200)
 		self.input_entry.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
 
-		select_button = customtkinter.CTkButton(frame, text="Select", width=95,command=self.select_event)
+		load_button = customtkinter.CTkButton(frame, text="Select", width=95,command=self.load_event)
 
 		if can_cancel:
-			select_button.grid(row=1, column=0, padx=(10,5), pady=(0,10))
+			load_button.grid(row=1, column=0, padx=(10,5), pady=(0,10))
 			cancel_button = customtkinter.CTkButton(frame, text="Cancel", width=95,command=self.cancel_event)
 			cancel_button.grid(row=1, column=1, padx=(5,10), pady=(0,10))
 		else:
-			select_button.configure(width=200)
-			select_button.grid(row=1, column=0, padx=10, pady=(0,10), columnspan=2)
+			load_button.configure(width=200)
+			load_button.grid(row=1, column=0, padx=10, pady=(0,10), columnspan=2)
 		
 
-	def select_event(self):
+	def load_event(self):
 		new_collection = self.input_entry.get()
 		if new_collection != "":
+			self.master.controller.clear_loaded()
 			self.master.controller.set_collection(new_collection)
+			self.master.controller.load_collection()
 			self.master.openSetupMenu()
 	
 
@@ -115,8 +117,8 @@ class SetupMenu(customtkinter.CTkFrame):
 		change_button = customtkinter.CTkButton(header_frame, text="Change", width=80,command=self.change_event)
 		change_button.grid(row=2, column=1, padx=10, pady=(10,20))
 
-		load_button = customtkinter.CTkButton(header_frame, text="Load", width=80,command=self.load_event)
-		load_button.grid(row=2, column=2, padx=10, pady=(10,20))
+		reload_button = customtkinter.CTkButton(header_frame, text="Reload", width=80,command=self.reload_event)
+		reload_button.grid(row=2, column=2, padx=0, pady=(10,20))
 
 		save_button = customtkinter.CTkButton(header_frame, text="Save", width=80,command=self.save_event)
 		save_button.grid(row=2, column=3, padx=10, pady=(10,20))
@@ -127,12 +129,13 @@ class SetupMenu(customtkinter.CTkFrame):
 	def change_event(self):
 		self.master.openInputMenu()
 
-	def load_event(self):
+	def reload_event(self):
 		self.master.controller.load_collection()
 		self.info_label.configure(text=self.master.controller.information)
 
 	def save_event(self):
-		pass
+		self.master.controller.save_collection()
+		self.info_label.configure(text=self.master.controller.information)
 
 
 		
