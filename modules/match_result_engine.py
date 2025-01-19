@@ -69,11 +69,13 @@ def _duel_calculation(subject:Sortable,opponents:list[Sortable], results:list[fl
 		opponent_pertinence = _pertinence(opponent.doubt)
 		subject_expectancy = _expectancy(subject.score, opponent.score, opponent_pertinence)
 
+		score_points += opponent_pertinence * (results[i]-subject_expectancy)
+
 		if verbose:
-			print(f'\n - VS = {opponent.name} (result : {results[i]})')
+			print(f' - VS = {opponent.name} (result : {results[i]})')
 			print(f'    pertin = {opponent_pertinence}')
 			print(f'    expect = {subject_expectancy}')
-		score_points += opponent_pertinence * (results[i]-subject_expectancy)
+			print(f'    score/dev = {score_points}')
 
 	if verbose:
 		print(f'\n Session result :')
