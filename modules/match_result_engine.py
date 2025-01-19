@@ -57,25 +57,28 @@ def _duel_calculation(subject:Sortable,opponents:list[Sortable], results:list[fl
 		opponent_pertinence = _pertinence(opponent.doubt)
 		subject_expectancy = _expectancy(subject.score, opponent.score, opponent_pertinence)
 
-		if verbose:
-			print(f'\n - VS = {opponent.name} (result : {results[i]})')
-			print(f'    pertin = {opponent_pertinence}')
-			print(f'    expect = {subject_expectancy}')
-
-
 		match_surprise += _surprise(subject_expectancy,results[i])
 		match_informativity += (opponent_pertinence**2)*subject_expectancy*(1-subject_expectancy)
 	
 	match_informativity *= CORRECTION**2
 
+
+
+	score_points = 0
+	for i, opponent in enumerate(opponents):
+		opponent_pertinence = _pertinence(opponent.doubt)
+		subject_expectancy = _expectancy(subject.score, opponent.score, opponent_pertinence)
+
+		if verbose:
+			print(f'\n - VS = {opponent.name} (result : {results[i]})')
+			print(f'    pertin = {opponent_pertinence}')
+			print(f'    expect = {subject_expectancy}')
+		score_points += opponent_pertinence * (results[i]-subject_expectancy)
+
 	if verbose:
 		print(f'\n Session result :')
 		print(f'    surprise = {match_surprise}')
 		print(f'    inform = {match_informativity}')
-
-	score_points = 0
-	for i, opponent in enumerate(opponents):
-		score_points = _pertinence(opponent.doubt) * (results[i]-subject_expectancy)
 
 	new_doubt = _new_doubt(subject.doubt,match_surprise,match_informativity)
 	score_points *= new_doubt
