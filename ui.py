@@ -167,10 +167,10 @@ class MatchMenu(customtkinter.CTkFrame):
 
 		participants_number = len(contestants)
 		row_number = int(np_sqrt(participants_number))
-		columns_number = int(participants_number/row_number)
+		column_number = int(participants_number/row_number)
 		self.winner_list = [False]*participants_number
 
-		image_size = int(320/max(row_number*1.5,columns_number))
+		image_size = int(320/max(row_number*1.5,column_number))
 
 		header_frame = customtkinter.CTkFrame(self, fg_color='transparent')
 		header_frame.grid(row=0, column=0, sticky="nsew")
@@ -185,13 +185,15 @@ class MatchMenu(customtkinter.CTkFrame):
 		
 		match_frame = customtkinter.CTkFrame(self, fg_color='transparent')
 		match_frame.grid(row=1, column=0, sticky="nsew")
-		match_frame.grid_columnconfigure((0, columns_number+1), weight=1)
+		match_frame.grid_columnconfigure((0, column_number+1), weight=1)
 		match_frame.grid_rowconfigure(0, weight=1)
 		match_frame.grid_rowconfigure(row_number+1, weight=2)
 
+		
+
 		for row in range(row_number):
-			for column in range(columns_number):
-				index = column + row*row_number
+			for column in range(column_number):
+				index = column + row*column_number
 				sortable_button = SortableButton(match_frame,index,self.contestants[index],image_size)
 				sortable_button.grid(row=row+1, column=column+1)
 		
