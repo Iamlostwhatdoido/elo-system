@@ -8,11 +8,11 @@ from modules import file_handler as fh, match_result_engine as mre
 class Controller:
 	def __init__(self):
 
-		self.size_list = [2,3,4,6,9,12,16,20]
+		self.size_list = ["2","3","4","6","9","12","16","20"]
 		self.mode_list = ['Random','Highest Doubt']
 
 		self.current_mode = self.mode_list[0]
-		self.current_size = self.size_list[0]
+		self.current_size = int(self.size_list[0])
 		self.current_collection : str = None
 
 		self.loaded_sortables : list[Sortable] = []
@@ -22,10 +22,8 @@ class Controller:
 	def clear_loaded(self):
 		self.loaded_sortables : list[Sortable] = []
 
-
 	def set_collection(self, collection_name:str):
 		self.current_collection = collection_name
-	
 
 	def load_collection(self):
 		fh.generate_collection(self.current_collection)
@@ -33,12 +31,16 @@ class Controller:
 		self.loaded_sortables = fh.load(self.current_collection)
 		self.information :str = f"Loaded {len(self.loaded_sortables)} elements"
 	
-
 	def save_collection(self):
 		fh.save(self.current_collection,self.loaded_sortables)
 		fh.generate_missing_png(self.current_collection)
 		self.information :str = f"Saved {len(self.loaded_sortables)} elements"
 	
+	def update_mode(self, choice):
+		self.current_mode = choice
+	
+	def update_size(self, choice):
+		self.current_size = int(choice)
 
 	def pick_sortables(self) -> list[Sortable]:
 		if self.current_size > len(self.loaded_sortables):
