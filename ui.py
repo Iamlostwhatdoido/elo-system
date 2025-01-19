@@ -125,11 +125,11 @@ class SetupMenu(customtkinter.CTkFrame):
 											command=self.mode_choice_event)
 		mode_droplist.grid(row=0,column=0, padx=10, pady=10)
 
-		size_droplist = customtkinter.CTkComboBox(main_frame, width=150, 
+		self.size_droplist = customtkinter.CTkComboBox(main_frame, width=150, 
 											values=master.controller.size_list,
 											variable=master.controller.current_size,
 											command=self.size_choice_event)
-		size_droplist.grid(row=1,column=0, padx=10, pady=(0,10))
+		self.size_droplist.grid(row=1,column=0, padx=10, pady=(0,10))
 
 		start_button = customtkinter.CTkButton(main_frame, text="Start", width=150, command=self.start_match)
 		start_button.grid(row=2, column=0, padx=10, pady=(0,10))
@@ -140,6 +140,7 @@ class SetupMenu(customtkinter.CTkFrame):
 	def reload_event(self):
 		self.master.controller.load_collection()
 		self.info_label.configure(text=self.master.controller.information)
+		self.size_droplist.configure(values=self.master.controller.size_list)
 
 	def save_event(self):
 		self.master.controller.save_collection()

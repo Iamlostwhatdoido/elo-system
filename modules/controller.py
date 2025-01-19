@@ -8,11 +8,12 @@ from modules import file_handler as fh, match_result_engine as mre
 class Controller:
 	def __init__(self):
 
-		self.size_list = ["2","3","4","6","9","12","16","20"]
+		self.default_size_list = ["2","3","4","6","9","12","16","20"]
+		self.size_list = []
 		self.mode_list = ['Random','Highest Doubt']
 
 		self.current_mode = self.mode_list[0]
-		self.current_size = int(self.size_list[0])
+		self.current_size = 0
 		self.current_collection : str = None
 
 		self.loaded_sortables : list[Sortable] = []
@@ -29,6 +30,10 @@ class Controller:
 		fh.generate_collection(self.current_collection)
 		fh.add_untracked_png(self.current_collection)
 		self.loaded_sortables = fh.load(self.current_collection)
+		self.size_list=[]
+		for e in self.default_size_list:
+			if int(e) <= len(self.loaded_sortables):
+				self.size_list.append(e)
 		self.information :str = f"Loaded {len(self.loaded_sortables)} elements"
 	
 	def save_collection(self):
@@ -40,15 +45,12 @@ class Controller:
 		self.current_mode = choice
 	
 	def update_size(self, choice):
-		self.current_size = int(choice)
+		self.current_size = choice
 
 	def pick_sortables(self) -> list[Sortable]:
-		if self.current_size > len(self.loaded_sortables):
-			print("Error, not enough elements loaded")
-			return []
 		return random.sample(
 			self.loaded_sortables,
-			self.current_size)
+			int(self.current_size))
 	
 
 	def resolve_match(self, winners:list[Sortable], losers:list[Sortable]):
