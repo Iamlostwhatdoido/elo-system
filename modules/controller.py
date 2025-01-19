@@ -39,6 +39,7 @@ class Controller:
 		self.information :str = f"Loaded {len(self.loaded_sortables)} elements"
 	
 	def save_collection(self):
+		self.loaded_sortables.sort(key = lambda sortable : sortable.score,reverse=True)
 		fh.save(self.current_collection,self.loaded_sortables)
 		fh.generate_missing_png(self.current_collection)
 		self.information :str = f"Saved {len(self.loaded_sortables)} elements"
@@ -54,7 +55,8 @@ class Controller:
 			return random.sample(self.loaded_sortables,	int(self.current_size))
 		elif self.current_mode == self.mode_list[1]:
 			random.shuffle(self.loaded_sortables)
-			return sorted(self.loaded_sortables, key = lambda sortable : sortable.doubt,reverse=True)[:int(self.current_size)]
+			self.loaded_sortables.sort(key = lambda sortable : sortable.doubt,reverse=True)
+			return self.loaded_sortables[:int(self.current_size)]
 		else:
 			print("unknown mode")
 			return []
