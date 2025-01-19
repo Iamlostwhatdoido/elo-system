@@ -62,4 +62,4 @@ class Controller:
 	
 
 	def resolve_match(self, winners:list[Sortable], losers:list[Sortable]):
-		mre.resolve_match(winners,losers,True)
+		mre.resolve_match(winners,losers,False)
