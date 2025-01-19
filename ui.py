@@ -153,7 +153,8 @@ class SetupMenu(customtkinter.CTkFrame):
 		self.master.controller.update_size(choice)
 	
 	def start_match(self):
-		self.master.openMatchMenu()
+		if self.master.controller.can_run():
+			self.master.openMatchMenu()
 
 
 class MatchMenu(customtkinter.CTkFrame):

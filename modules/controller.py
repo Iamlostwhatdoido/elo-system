@@ -19,6 +19,8 @@ class Controller:
 		self.loaded_sortables : list[Sortable] = []
 		self.information :str = "# controller initialized"
 
+	def can_run(self) -> bool:
+		return (self.current_mode in self.mode_list)*(self.current_size in self.size_list)*(self.loaded_sortables != [])
 
 	def clear_loaded(self):
 		self.loaded_sortables : list[Sortable] = []
@@ -48,9 +50,15 @@ class Controller:
 		self.current_size = choice
 
 	def pick_sortables(self) -> list[Sortable]:
-		return random.sample(
-			self.loaded_sortables,
-			int(self.current_size))
+		if self.current_mode == self.mode_list[0]:
+			return random.sample(self.loaded_sortables,	int(self.current_size))
+		elif self.current_mode == self.mode_list[1]:
+			random.shuffle(self.loaded_sortables)
+			return sorted(self.loaded_sortables, key = lambda sortable : sortable.doubt,reverse=True)[:int(self.current_size)]
+		else:
+			print("unknown mode")
+			return []
+		
 	
 
 	def resolve_match(self, winners:list[Sortable], losers:list[Sortable]):
