@@ -10,7 +10,7 @@ class Controller:
 
 		self.default_size_list = ["2","3","4","6","9","12","16","20"]
 		self.size_list = []
-		self.mode_list = ['Random','Highest Doubt']
+		self.mode_list = ['Random','Highest Doubt','Score Density']
 
 		self.current_mode = self.mode_list[0]
 		self.current_size = 0
@@ -57,6 +57,21 @@ class Controller:
 			random.shuffle(self.loaded_sortables)
 			self.loaded_sortables.sort(key = lambda sortable : sortable.doubt,reverse=True)
 			return self.loaded_sortables[:int(self.current_size)]
+		elif self.current_mode == self.mode_list[2]:
+			random.shuffle(self.loaded_sortables)
+			self.loaded_sortables.sort(key = lambda sortable : sortable.score,reverse=True)
+			index = 0
+			minimum = self.loaded_sortables[0].score - self.loaded_sortables[-1].score
+			for i in range(len(self.loaded_sortables)-int(self.current_size)+1):
+				diff = self.loaded_sortables[i].score - self.loaded_sortables[i+int(self.current_size)-1].score
+				if diff == 0:
+					index = i
+					break
+				elif  diff < minimum:
+					minimum = diff
+					index = i
+			return self.loaded_sortables[index:index+int(self.current_size)]
+
 		else:
 			print("unknown mode")
 			return []
