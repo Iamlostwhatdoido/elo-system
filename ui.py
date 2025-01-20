@@ -18,7 +18,8 @@ class Window(customtkinter.CTk):
 
 		self.controller = Controller()
 		self.title("Elo Calculator")
-		self.geometry("800x600")
+
+		self.after(50, lambda: self.state('zoomed'))
 
 		self.grid_columnconfigure(0, weight=1)
 		self.grid_rowconfigure(0, weight=1)
@@ -170,7 +171,7 @@ class MatchMenu(customtkinter.CTkFrame):
 		column_number = int(participants_number/row_number)
 		self.winner_list = [False]*participants_number
 
-		image_size = int(320/max(row_number*1.5,column_number))
+		image_size = int(500/max(row_number*1.5,column_number))
 
 		header_frame = customtkinter.CTkFrame(self, fg_color='transparent')
 		header_frame.grid(row=0, column=0, sticky="nsew")
@@ -240,7 +241,7 @@ class SortableButton(customtkinter.CTkFrame):
 			fg_color="#2b2b2b",
 			hover_color="#4f4f4f",
 			text_color="#ffffff")
-		self.button.grid(row=0, column=0, padx = int(image_size/4), pady=int(image_size/8))
+		self.button.grid(row=0, column=0, padx = int(image_size/2), pady=int(image_size/8))
 
 	def button_event(self):
 		self.master.master.toggle_index(self.index)
