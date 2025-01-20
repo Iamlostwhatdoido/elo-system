@@ -54,9 +54,11 @@ class Controller:
 		if self.current_mode == self.mode_list[0]:
 			return random.sample(self.loaded_sortables,	int(self.current_size))
 		elif self.current_mode == self.mode_list[1]:
+			random.shuffle(self.loaded_sortables)
 			self.loaded_sortables.sort(key = lambda sortable : sortable.doubt,reverse=True)
 			return self.loaded_sortables[:int(self.current_size)]
 		elif self.current_mode == self.mode_list[2]:
+			random.shuffle(self.loaded_sortables)
 			self.loaded_sortables.sort(key = lambda sortable : sortable.score,reverse=True)
 			index = 0
 			minimum = self.loaded_sortables[0].score - self.loaded_sortables[-1].score
