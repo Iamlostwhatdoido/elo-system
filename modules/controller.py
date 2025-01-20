@@ -39,7 +39,7 @@ class Controller:
 		self.information :str = f"Loaded {len(self.loaded_sortables)} elements"
 	
 	def save_collection(self):
-		self.loaded_sortables.sort(key = lambda sortable : sortable.score,reverse=True)
+		self.loaded_sortables.sort(key = lambda sortable : sortable.name,reverse=False)
 		fh.save(self.current_collection,self.loaded_sortables)
 		fh.generate_missing_png(self.current_collection)
 		self.information :str = f"Saved {len(self.loaded_sortables)} elements"
