@@ -171,6 +171,7 @@ class MatchMenu(customtkinter.CTkFrame):
 		column_number = int(participants_number/row_number)
 		self.winner_list = [False]*participants_number
 
+		# size : ~ 1540x800
 		image_size = int(500/max(row_number*1.5,column_number))
 
 		header_frame = customtkinter.CTkFrame(self, fg_color='transparent')
