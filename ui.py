@@ -229,11 +229,15 @@ class SortableButton(customtkinter.CTkFrame):
 
 		self.index = associated_index
 		self.button_toggled = False
+
+		# Second most taxing :
 		pillow_image = Image.open(associated_sortable.image_path)
+
 		factor = image_size / max(pillow_image.width,pillow_image.height)
 		(new_width, new_height) = (int(pillow_image.width * factor), int(pillow_image.height * factor))
-		display_image = customtkinter.CTkImage(light_image=pillow_image,
-								  size=(new_width, new_height))
+		display_image = customtkinter.CTkImage(light_image=pillow_image, size=(new_width, new_height))
+
+		# Most taxing :
 		self.button = customtkinter.CTkButton(
 			self,
 			width=10,
@@ -244,7 +248,9 @@ class SortableButton(customtkinter.CTkFrame):
 			fg_color="#2b2b2b",
 			hover_color="#4f4f4f",
 			text_color="#ffffff")
+		
 		self.button.grid(row=0, column=0, padx = int(image_size/2), pady=int(image_size/8))
+
 
 	def button_event(self):
 		self.master.master.toggle_index(self.index)
