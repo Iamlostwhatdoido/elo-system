@@ -1,6 +1,4 @@
 from config import *
-import concurrent.futures
-
 from modules.controller import Controller
 from modules.sortable_class import Sortable
 
@@ -163,17 +161,16 @@ class MatchMenu(customtkinter.CTkFrame):
 	def __init__(self, master:Window, contestants : list[Sortable], **kwargs):
 		super().__init__(master, fg_color='transparent', **kwargs)
 
-
 		self.contestants = contestants
 		self.columnconfigure(0,weight=1)
 		self.rowconfigure(1,weight=1)
 
 		participants_number = len(contestants)
 		row_number = int(np_sqrt(participants_number))
-		self.column_number = int(participants_number/row_number)
+		column_number = int(participants_number/row_number)
 		self.winner_list = [False]*participants_number
 
-		image_size = int(320/max(row_number*1.5,self.column_number))
+		image_size = int(320/max(row_number*1.5,column_number))
 
 		header_frame = customtkinter.CTkFrame(self, fg_color='transparent')
 		header_frame.grid(row=0, column=0, sticky="nsew")
@@ -188,25 +185,21 @@ class MatchMenu(customtkinter.CTkFrame):
 		
 		match_frame = customtkinter.CTkFrame(self, fg_color='transparent')
 		match_frame.grid(row=1, column=0, sticky="nsew")
-		match_frame.grid_columnconfigure((0, self.column_number+1), weight=1)
+		match_frame.grid_columnconfigure((0, column_number+1), weight=1)
 		match_frame.grid_rowconfigure(0, weight=1)
 		match_frame.grid_rowconfigure(row_number+1, weight=2)
 
-		with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:            
-			for row in range(row_number):
-				for column in range(self.column_number):
-					index = column + row*self.column_number
+		
 
-					# executor.submit(self.threading_sortable_button, match_frame,column,row,self.contestants[index],image_size)
-					self.threading_sortable_button(match_frame,column,row,self.contestants[index],image_size)
-
+		for row in range(row_number):
+			for column in range(column_number):
+				index = column + row*column_number
+				sortable_button = SortableButton(match_frame,index,self.contestants[index],image_size)
+				sortable_button.grid(row=row+1, column=column+1)
+		
 		submit_button = customtkinter.CTkButton(self, text="Submit", width=60, command=self.submit_event)
 		submit_button.grid(row=2, column=0, padx=5, pady=(20,50))
 
-	def threading_sortable_button(self,master,column,row,sortable,image_size):
-		index = column + row*self.column_number
-		sortable_button = SortableButton(master,index,sortable,image_size)
-		sortable_button.grid(row=row+1, column=column+1)
 	
 	def save_event(self):
 		self.master.controller.save_collection()
@@ -237,7 +230,6 @@ class SortableButton(customtkinter.CTkFrame):
 		self.button_toggled = False
 		display_image = customtkinter.CTkImage(light_image=Image.open(associated_sortable.image_path),
 								  size=(image_size, image_size))
-		
 		self.button = customtkinter.CTkButton(
 			self,
 			width=10,
@@ -248,7 +240,6 @@ class SortableButton(customtkinter.CTkFrame):
 			fg_color="#2b2b2b",
 			hover_color="#4f4f4f",
 			text_color="#ffffff")
-		
 		self.button.grid(row=0, column=0, padx = int(image_size/4), pady=int(image_size/8))
 
 	def button_event(self):
