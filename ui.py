@@ -229,8 +229,11 @@ class SortableButton(customtkinter.CTkFrame):
 
 		self.index = associated_index
 		self.button_toggled = False
-		display_image = customtkinter.CTkImage(light_image=Image.open(associated_sortable.image_path),
-								  size=(image_size, image_size))
+		pillow_image = Image.open(associated_sortable.image_path)
+		factor = image_size / max(pillow_image.width,pillow_image.height)
+		(new_width, new_height) = (int(pillow_image.width * factor), int(pillow_image.height * factor))
+		display_image = customtkinter.CTkImage(light_image=pillow_image,
+								  size=(new_width, new_height))
 		self.button = customtkinter.CTkButton(
 			self,
 			width=10,
