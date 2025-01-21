@@ -199,7 +199,7 @@ class MatchMenu(customtkinter.CTkFrame):
 				sortable_button = SortableButton(match_frame,index,self.contestants[index],image_size)
 				sortable_button.grid(row=row+1, column=column+1)
 		
-		submit_button = customtkinter.CTkButton(self, text="Submit", width=60, command=self.submit_event)
+		submit_button = customtkinter.CTkButton(self, text="Submit", width=140,height=60,font=("",20), command=self.submit_event)
 		submit_button.grid(row=2, column=0, padx=5, pady=(20,50))
 
 	
