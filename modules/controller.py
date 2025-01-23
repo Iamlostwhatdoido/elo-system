@@ -56,8 +56,9 @@ class Controller:
 		elif self.current_mode == self.mode_list[1]:
 			random.shuffle(self.loaded_sortables)
 			self.loaded_sortables.sort(key = lambda sortable : sortable.doubt,reverse=True)
-
-			return self.loaded_sortables[:round(int(self.current_size)/2)]+self.loaded_sortables[-int(int(self.current_size)/2):]
+			out = (	self.loaded_sortables[ : round(int(self.current_size)/2) ] + 
+		  			self.loaded_sortables[    -int(int(self.current_size)/2) : ])
+			return random.shuffle(out)
 		
 		elif self.current_mode == self.mode_list[2]:
 			self.loaded_sortables.sort(key = lambda sortable : sortable.score,reverse=True)
