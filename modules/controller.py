@@ -8,7 +8,7 @@ from modules import file_handler as fh, match_result_engine as mre
 class Controller:
 	def __init__(self):
 
-		self.default_size_list = ["2","3","4","6","9","12","16","20"]
+		self.default_size_list = STANDARD_CONTESTANTS_NUMBERS.keys()
 		self.size_list = []
 		self.mode_list = ['Random','Highest Doubt','Score Density']
 

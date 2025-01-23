@@ -166,13 +166,18 @@ class MatchMenu(customtkinter.CTkFrame):
 		self.columnconfigure(0,weight=1)
 		self.rowconfigure(1,weight=1)
 
+
 		participants_number = len(contestants)
-		row_number = int(np_sqrt(participants_number))
-		column_number = int(participants_number/row_number)
+
+		row_number = STANDARD_CONTESTANTS_NUMBERS[str(participants_number)][0]
+		column_number = STANDARD_CONTESTANTS_NUMBERS[str(participants_number)][1]
+
+		print(row_number,column_number)
+
 		self.winner_list = [False]*participants_number
 
 		# size : ~ 1540x800
-		image_size = int(500/max(row_number*1.5,column_number))
+		image_size = int(min(MATCH_AREA_WIDTH/column_number,MATCH_AREA_HEIGHT/row_number))
 
 		header_frame = customtkinter.CTkFrame(self, fg_color='transparent')
 		header_frame.grid(row=0, column=0, sticky="nsew")
@@ -250,7 +255,7 @@ class SortableButton(customtkinter.CTkFrame):
 			hover_color="#4f4f4f",
 			text_color="#ffffff")
 		
-		self.button.grid(row=0, column=0, padx = int(image_size/2), pady=int(image_size/8))
+		self.button.grid(row=0, column=0, padx = int(image_size/8), pady=int(image_size/8))
 
 
 	def button_event(self):
