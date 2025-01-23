@@ -53,6 +53,7 @@ class Controller:
 	def pick_sortables(self) -> list[Sortable]:
 		if self.current_mode == self.mode_list[0]:
 			return random.sample(self.loaded_sortables,	int(self.current_size))
+		
 		elif self.current_mode == self.mode_list[1]:
 			random.shuffle(self.loaded_sortables)
 			self.loaded_sortables.sort(key = lambda sortable : sortable.doubt,reverse=True)
