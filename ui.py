@@ -172,8 +172,6 @@ class MatchMenu(customtkinter.CTkFrame):
 		row_number = STANDARD_CONTESTANTS_NUMBERS[str(participants_number)][0]
 		column_number = STANDARD_CONTESTANTS_NUMBERS[str(participants_number)][1]
 
-		print(row_number,column_number)
-
 		self.winner_list = [False]*participants_number
 
 		# size : ~ 1540x800
