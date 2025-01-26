@@ -1,6 +1,0 @@
-Best1	300
-Best2	300
-Best3	300
-Best4	300
-Mid	200
-Low	100

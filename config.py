@@ -1,10 +1,9 @@
 import numpy as np
 
-DATA_PATH = "/data"
+DATA_PATH = "/collections"
 IMAGE_PATH = "/image"
 UNKNOWN_FILE_PATH = "./modules/unknown.png"
 SAVE_FILE = "/save.tsv"
-ICON_FILE = "./icon.png"
 
 DEFAULT_SCORE = 0
 DEFAULT_DOUBT = 400
