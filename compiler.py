@@ -5,6 +5,10 @@ VERSION = "0.1.0"
 
 MAIN_SCRIPT = "main"
 ICON_FILE = "icon.ico"
+RELEASE_DIR = "releases"
+
+if not os.path.exists(f"./{RELEASE_DIR}"):
+	os.mkdir(f"{RELEASE_DIR}")
 
 if os.path.exists(f"./releases/{EXE_NAME} v{VERSION}.exe"):
 	print(f"ERROR : Version {VERSION} already exists.")
