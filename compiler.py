@@ -14,7 +14,7 @@ if os.path.exists(f"./releases/{EXE_NAME} v{VERSION}.exe"):
 	print(f"ERROR : Version {VERSION} already exists.")
 else:
 	command = f"python -m PyInstaller {MAIN_SCRIPT}.py " \
-		f"--onefile " \
+		f"--onefile --noconsole " \
 		f"--icon {ICON_FILE} " \
 		f"--distpath releases " \
 		f'-n "{EXE_NAME} v{VERSION}"'
