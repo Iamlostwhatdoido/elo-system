@@ -1,4 +1,5 @@
 import random
+import copy
 from config import *
 from .sortable_class import Sortable
 from modules import file_handler as fh, match_result_engine as mre
@@ -38,7 +39,7 @@ class Controller:
 		self.information :str = f"Loaded {len(self.loaded_sortables)} elements"
 	
 	def save_collection(self):
-		self.loaded_sortables.sort(key = lambda sortable : sortable.name,reverse=False)
+		# self.loaded_sortables.sort(key = lambda sortable : sortable.name,reverse=False)
 		fh.save(self.current_collection,self.loaded_sortables)
 		fh.generate_missing_png(self.current_collection)
 		self.information :str = f"Saved {len(self.loaded_sortables)} elements"
@@ -54,25 +55,31 @@ class Controller:
 			return random.sample(self.loaded_sortables,	int(self.current_size))
 		
 		elif self.current_mode == self.mode_list[1]:
-			random.shuffle(self.loaded_sortables)
-			self.loaded_sortables.sort(key = lambda sortable : sortable.doubt,reverse=True)
-			out = (	self.loaded_sortables[ : round(int(self.current_size)/2) ] + 
-		  			self.loaded_sortables[    -int(int(self.current_size)/2) : ])
-			return random.shuffle(out)
+			shuffled_list = copy.copy(self.loaded_sortables)
+			random.shuffle(shuffled_list)
+			
+			shuffled_list.sort(key = lambda sortable : sortable.doubt,reverse=True)
+			out = (	shuffled_list[ : round(int(self.current_size)/2) ] + 
+		  			shuffled_list[    -int(int(self.current_size)/2) : ])
+			
+			random.shuffle(out)
+			return out
 		
 		elif self.current_mode == self.mode_list[2]:
-			self.loaded_sortables.sort(key = lambda sortable : sortable.score,reverse=True)
+
+			sorted_list = copy.copy(self.loaded_sortables)
+			sorted_list.sort(key = lambda sortable : sortable.score,reverse=True)
 			index = 0
-			minimum = self.loaded_sortables[0].score - self.loaded_sortables[-1].score
-			for i in range(len(self.loaded_sortables)-int(self.current_size)+1):
-				diff = self.loaded_sortables[i].score - self.loaded_sortables[i+int(self.current_size)-1].score
+			minimum = sorted_list[0].score - sorted_list[-1].score
+			for i in range(len(sorted_list)-int(self.current_size)+1):
+				diff = sorted_list[i].score - sorted_list[i+int(self.current_size)-1].score
 				if diff == 0:
 					index = i
 					break
 				elif  diff < minimum:
 					minimum = diff
 					index = i
-			return self.loaded_sortables[index:index+int(self.current_size)]
+			return sorted_list[index:index+int(self.current_size)]
 
 		else:
 			print("unknown mode")

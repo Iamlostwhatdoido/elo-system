@@ -2,7 +2,6 @@ from config import *
 from modules.controller_class import Controller
 from modules.sortable_class import Sortable
 
-from numpy import sqrt as np_sqrt
 from PIL import Image
 import customtkinter
 
