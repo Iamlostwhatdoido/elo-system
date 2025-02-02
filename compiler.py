@@ -1,7 +1,7 @@
 import os
 
 EXE_NAME = "Elo Sorter"
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 MAIN_SCRIPT = "main"
 ICON_FILE = "icon.ico"
