@@ -30,7 +30,7 @@ class Controller:
 
 	def load_collection(self):
 		fh.generate_collection(self.current_collection)
-		fh.add_untracked_png(self.current_collection)
+		# fh.add_untracked_png(self.current_collection)
 		self.loaded_sortables = fh.load(self.current_collection)
 		self.size_list=[]
 		for e in self.default_size_list:
