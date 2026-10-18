@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bt642pfskg41v"]
+
+[ext_resource type="Script" uid="uid://d4i1uk1f8mt3k" path="res://scenes/tool.gd" id="1_qu7vi"]
+
+[node name="The Root" type="Node2D" unique_id=1249544287]
+script = ExtResource("1_qu7vi")
+
+[node name="Display" type="TextureRect" parent="." unique_id=1558524913]
+offset_right = 40.0
+offset_bottom = 40.0

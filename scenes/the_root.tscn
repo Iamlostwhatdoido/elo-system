@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bt642pfskg41v"]
+
+[ext_resource type="Script" uid="uid://d4i1uk1f8mt3k" path="res://scenes/tool.gd" id="1_qu7vi"]
+[ext_resource type="PackedScene" uid="uid://bnpbqobygscch" path="res://scenes/sortable_card.tscn" id="2_6g4pf"]
+
+[node name="The Root" type="Node2D" unique_id=1249544287]
+script = ExtResource("1_qu7vi")
+
+[node name="Right" parent="." unique_id=1090504632 instance=ExtResource("2_6g4pf")]
+position = Vector2(726, 145)
+
+[node name="Left" parent="." unique_id=1766601240 instance=ExtResource("2_6g4pf")]
+position = Vector2(107, 141)
+
+[node name="LeftButton" type="Button" parent="." unique_id=1863050575]
+offset_left = 180.0
+offset_top = 496.0
+offset_right = 354.0
+offset_bottom = 551.0
+text = "THIS ONE"
+
+[node name="EqualButton" type="Button" parent="." unique_id=782161554]
+offset_left = 478.0
+offset_top = 498.0
+offset_right = 652.0
+offset_bottom = 553.0
+text = "EQUAL"
+
+[node name="RightButton" type="Button" parent="." unique_id=778768377]
+offset_left = 795.0
+offset_top = 492.0
+offset_right = 969.0
+offset_bottom = 547.0
+text = "THAT ONE"
+
+[node name="SaveButton" type="Button" parent="." unique_id=1596351474]
+offset_left = 1018.0
+offset_top = 14.0
+offset_right = 1127.0
+offset_bottom = 45.0
+text = "Save
+"
+
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="EqualButton" to="." method="_on_middle_button_pressed"]
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]

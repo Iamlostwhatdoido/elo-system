@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bnpbqobygscch"]
+
+[ext_resource type="Script" uid="uid://c6sr8nyb5436e" path="res://scenes/sortable_card.gd" id="1_r1inl"]
+
+[node name="SortableCard" type="Node2D" unique_id=1090504632]
+script = ExtResource("1_r1inl")
+
+[node name="Panel" type="Panel" parent="." unique_id=1940383640]
+offset_right = 300.0
+offset_bottom = 300.0
+
+[node name="TextureRect" type="TextureRect" parent="Panel" unique_id=311173448]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 4
