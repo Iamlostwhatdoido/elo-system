@@ -20,5 +20,5 @@ Projet Godot 4.6 (GDScript) pour classer une collection d'éléments par compara
 En cours. `tool.gd` charge une collection d'images de test depuis `D:/[02] Code/03 Sandbox/temp/glicko-sorter/Collection` et affiche deux éléments au hasard. Export TSV disponible (`Arena.export_tsv`).
 
 ## Liens
-- [`elo-system`](../elo-system) : version précédente, en Python (exe « Elo Sorter », dans `06 Releases/elo-sorter`). Même usage, calcul Elo plus simple. Les deux projets ont vocation à fusionner.
-- [`manual-sorting`](../manual-sorting) : projet cousin mais indépendant. Il fait un tri définitif à l'instant T avec le moins de comparaisons possible (un A > B n'est jamais remis en cause). Les sorters Elo/Glicko, eux, s'utilisent dans la durée et suivent l'évolution des préférences.
+- [`../python`](../python) : version précédente, en Python (exe « Elo Sorter », dans `06 Releases/elo-sorter`). Même usage, calcul plus simple. Ancien dépôt séparé `glicko-sorter`, fusionné ici avec son historique.
+- [`manual-sorting`](../../manual-sorting) : projet cousin mais indépendant. Il fait un tri définitif à l'instant T avec le moins de comparaisons possible (un A > B n'est jamais remis en cause). Les sorters Elo/Glicko, eux, s'utilisent dans la durée et suivent l'évolution des préférences.
